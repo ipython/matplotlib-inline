@@ -68,14 +68,14 @@ class InlineBackend(InlineBackendConfig):
     )
 
     figure_formats = Set({'png'}, config=True,
-                          help="""A set of figure formats to enable: 'png', 
+                          help="""A set of figure formats to enable: 'png',
                           'retina', 'jpeg', 'svg', 'pdf'.""")
 
     def _update_figure_formatters(self):
         if self.shell is not None:
             from IPython.core.pylabtools import select_figure_formats
             select_figure_formats(self.shell, self.figure_formats, **self.print_figure_kwargs)
-    
+
     def _figure_formats_changed(self, name, old, new):
         if 'jpg' in new or 'jpeg' in new:
             if not pil_available():
@@ -91,20 +91,20 @@ class InlineBackend(InlineBackendConfig):
 
     print_figure_kwargs = Dict({'bbox_inches' : 'tight'}, config=True,
         help="""Extra kwargs to be passed to fig.canvas.print_figure.
-        
+
         Logical examples include: bbox_inches, quality (for jpeg figures), etc.
         """
     )
     _print_figure_kwargs_changed = _update_figure_formatters
-    
+
     close_figures = Bool(True, config=True,
         help="""Close all figures at the end of each cell.
-        
+
         When True, ensures that each cell starts with no active figures, but it
         also means that one must keep track of references in order to edit or
         redraw figures in subsequent cells. This mode is ideal for the notebook,
         where residual plots from other cells might be surprising.
-        
+
         When False, one must call figure() to create new figures. This means
         that gcf() and getfigs() can reference figures created in other cells,
         and the active figure can continue to be edited with pylab/pyplot
@@ -116,5 +116,4 @@ class InlineBackend(InlineBackendConfig):
     
     shell = Instance('IPython.core.interactiveshell.InteractiveShellABC',
                      allow_none=True)
-
 

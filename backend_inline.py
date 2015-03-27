@@ -65,7 +65,7 @@ def draw_if_interactive():
     # For further reference:
     # https://github.com/ipython/ipython/issues/1612
     # https://github.com/matplotlib/matplotlib/issues/835
-    
+
     if not hasattr(fig, 'show'):
         # Queue up `fig` for display
         fig.show = lambda *a: display(fig)
@@ -94,7 +94,7 @@ def flush_figures():
 
     This is meant to be called automatically and will call show() if, during
     prior code execution, there had been any calls to draw_if_interactive.
-    
+
     This function is meant to be used as a post_execute callback in IPython,
     so user-caused errors are handled with showtraceback() instead of being
     allowed to raise.  If this function is not called from within IPython,
@@ -102,7 +102,7 @@ def flush_figures():
     """
     if not show._draw_called:
         return
-    
+
     if InlineBackend.instance().close_figures:
         # ignore the tracking, just draw and close all figures
         try:
@@ -139,4 +139,3 @@ def flush_figures():
 # figurecanvas. This is set here to a Agg canvas
 # See https://github.com/matplotlib/matplotlib/pull/1125
 FigureCanvas = FigureCanvasAgg
-
