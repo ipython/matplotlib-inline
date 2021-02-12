@@ -17,6 +17,7 @@ setup(
     python_requires='>=3.5',
     install_requires=[
         'matplotlib',
+        'traitlets',
         'ipython'
     ],
     extras_require={

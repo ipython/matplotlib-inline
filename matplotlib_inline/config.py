@@ -11,23 +11,23 @@ from traitlets import (
     Dict, Instance, Set, Bool, TraitError, Unicode
 )
 
-#-----------------------------------------------------------------------------
-# Configurable for inline backend options
-#-----------------------------------------------------------------------------
 
+# Configurable for inline backend options
 def pil_available():
     """Test if PIL/Pillow is available"""
     out = False
     try:
-        from PIL import Image
+        from PIL import Image  # noqa
         out = True
-    except:
+    except ImportError:
         pass
     return out
 
-# inherit from InlineBackendConfig for deprecation purposes
+
+# Inherit from InlineBackendConfig for deprecation purposes
 class InlineBackendConfig(SingletonConfigurable):
     pass
+
 
 class InlineBackend(InlineBackendConfig):
     """An object to store configuration of the inline backend."""
@@ -35,25 +35,28 @@ class InlineBackend(InlineBackendConfig):
     # The typical default figure size is too large for inline use,
     # so we shrink the figure size to 6x4, and tweak fonts to
     # make that fit.
-    rc = Dict({'figure.figsize': (6.0,4.0),
-        # play nicely with white background in the Qt and notebook frontend
-        'figure.facecolor': (1,1,1,0),
-        'figure.edgecolor': (1,1,1,0),
-        # 12pt labels get cutoff on 6x4 logplots, so use 10pt.
-        'font.size': 10,
-        # 72 dpi matches SVG/qtconsole
-        # this only affects PNG export, as SVG has no dpi setting
-        'figure.dpi': 72,
-        # 10pt still needs a little more room on the xlabel:
-        'figure.subplot.bottom' : .125
+    rc = Dict(
+        {
+            'figure.figsize': (6.0, 4.0),
+            # play nicely with white background in the Qt and notebook frontend
+            'figure.facecolor': (1, 1, 1, 0),
+            'figure.edgecolor': (1, 1, 1, 0),
+            # 12pt labels get cutoff on 6x4 logplots, so use 10pt.
+            'font.size': 10,
+            # 72 dpi matches SVG/qtconsole
+            # this only affects PNG export, as SVG has no dpi setting
+            'figure.dpi': 72,
+            # 10pt still needs a little more room on the xlabel:
+            'figure.subplot.bottom': .125
         },
         help="""Subset of matplotlib rcParams that should be different for the
         inline backend."""
     ).tag(config=True)
 
-    figure_formats = Set({'png'},
-                          help="""A set of figure formats to enable: 'png',
-                          'retina', 'jpeg', 'svg', 'pdf'.""").tag(config=True)
+    figure_formats = Set(
+        {'png'},
+        help="""A set of figure formats to enable: 'png',
+                'retina', 'jpeg', 'svg', 'pdf'.""").tag(config=True)
 
     def _update_figure_formatters(self):
         if self.shell is not None:
@@ -73,7 +76,8 @@ class InlineBackend(InlineBackendConfig):
         if new:
             self.figure_formats = {new}
 
-    print_figure_kwargs = Dict({'bbox_inches' : 'tight'},
+    print_figure_kwargs = Dict(
+        {'bbox_inches': 'tight'},
         help="""Extra kwargs to be passed to fig.canvas.print_figure.
 
         Logical examples include: bbox_inches, quality (for jpeg figures), etc.
@@ -81,7 +85,8 @@ class InlineBackend(InlineBackendConfig):
     ).tag(config=True)
     _print_figure_kwargs_changed = _update_figure_formatters
 
-    close_figures = Bool(True,
+    close_figures = Bool(
+        True,
         help="""Close all figures at the end of each cell.
 
         When True, ensures that each cell starts with no active figures, but it

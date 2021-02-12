@@ -4,11 +4,11 @@
 # Distributed under the terms of the BSD 3-Clause License.
 
 import matplotlib
-from matplotlib.backends.backend_agg import (
+from matplotlib.backends.backend_agg import (  # noqa
     new_figure_manager,
     FigureCanvasAgg,
     new_figure_manager_given_figure,
-) # analysis: ignore
+)
 from matplotlib import colors
 from matplotlib._pylab_helpers import Gcf
 
@@ -129,7 +129,7 @@ def flush_figures():
     try:
         # exclude any figures that were closed:
         active = set([fm.canvas.figure for fm in Gcf.get_all_fig_managers()])
-        for fig in [ fig for fig in show._to_draw if fig in active ]:
+        for fig in [fig for fig in show._to_draw if fig in active]:
             try:
                 display(fig, metadata=_fetch_figure_metadata(fig))
             except Exception as e:
@@ -218,7 +218,9 @@ def _enable_matplotlib_integration():
                 ip.events.unregister('post_run_cell', configure_once)
             ip.events.register('post_run_cell', configure_once)
 
+
 _enable_matplotlib_integration()
+
 
 def _fetch_figure_metadata(fig):
     """Get some metadata to help with displaying a figure."""
@@ -235,12 +237,14 @@ def _fetch_figure_metadata(fig):
 
     return None
 
+
 def _is_light(color):
     """Determines if a color (or each of a sequence of colors) is light (as
     opposed to dark). Based on ITU BT.601 luminance formula (see
     https://stackoverflow.com/a/596241)."""
     rgbaArr = colors.to_rgba_array(color)
-    return rgbaArr[:,:3].dot((.299, .587, .114)) > .5
+    return rgbaArr[:, :3].dot((.299, .587, .114)) > .5
+
 
 def _is_transparent(color):
     """Determine transparency from alpha."""
