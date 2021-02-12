@@ -12,6 +12,7 @@ from matplotlib.backends.backend_agg import (  # noqa
 from matplotlib import colors
 from matplotlib._pylab_helpers import Gcf
 
+from IPython.core.interactiveshell import InteractiveShell
 from IPython.core.getipython import get_ipython
 from IPython.core.pylabtools import select_figure_formats
 from IPython.display import display
@@ -170,7 +171,7 @@ def configure_inline_support(shell, backend):
     if cfg not in shell.configurables:
         shell.configurables.append(cfg)
 
-    if backend == 'module://ipykernel.pylab.backend_inline':
+    if backend == 'module://matplotlib_inline.backend_inline':
         shell.events.register('post_execute', flush_figures)
 
         # Save rcParams that will be overwrittern
@@ -250,3 +251,56 @@ def _is_transparent(color):
     """Determine transparency from alpha."""
     rgba = colors.to_rgba(color)
     return rgba[3] < .5
+
+
+def set_matplotlib_formats(*formats, **kwargs):
+    """Select figure formats for the inline backend. Optionally pass quality for JPEG.
+
+    For example, this enables PNG and JPEG output with a JPEG quality of 90%::
+
+        In [1]: set_matplotlib_formats('png', 'jpeg', quality=90)
+
+    To set this in your config files use the following::
+
+        c.InlineBackend.figure_formats = {'png', 'jpeg'}
+        c.InlineBackend.print_figure_kwargs.update({'quality' : 90})
+
+    Parameters
+    ----------
+    *formats : strs
+        One or more figure formats to enable: 'png', 'retina', 'jpeg', 'svg', 'pdf'.
+    **kwargs
+        Keyword args will be relayed to ``figure.canvas.print_figure``.
+    """
+    # build kwargs, starting with InlineBackend config
+    cfg = InlineBackend.instance()
+    kw = {}
+    kw.update(cfg.print_figure_kwargs)
+    kw.update(**kwargs)
+    shell = InteractiveShell.instance()
+    select_figure_formats(shell, formats, **kw)
+
+
+def set_matplotlib_close(close=True):
+    """Set whether the inline backend closes all figures automatically or not.
+
+    By default, the inline backend used in the IPython Notebook will close all
+    matplotlib figures automatically after each cell is run. This means that
+    plots in different cells won't interfere. Sometimes, you may want to make
+    a plot in one cell and then refine it in later cells. This can be accomplished
+    by::
+
+        In [1]: set_matplotlib_close(False)
+
+    To set this in your config files use the following::
+
+        c.InlineBackend.close_figures = False
+
+    Parameters
+    ----------
+    close : bool
+        Should all matplotlib figures be automatically closed after each cell is
+        run?
+    """
+    cfg = InlineBackend.instance()
+    cfg.close_figures = close
