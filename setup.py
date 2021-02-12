@@ -16,7 +16,7 @@ setup(
     packages=find_packages(exclude=['test']),
     python_requires='>=3.5',
     install_requires=[
-        'matplotlib',
+        # 'matplotlib',
         'traitlets',
         'ipython'
     ],
