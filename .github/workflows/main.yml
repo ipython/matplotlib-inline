@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.9]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        mamba-version: "*"
+        auto-activate-base: false
+        channels: conda-forge
+
+    - name: Install dependencies
+      run: mamba install ipython matplotlib flake8
+
+    - name: Install package
+      run: pip install .
+
+    - name: Test flake8
+      run: flake8 matplotlib_inline --ignore=E501,W504,W503
