@@ -1,7 +1,7 @@
 """A matplotlib backend for publishing figures via display_data"""
 
 # Copyright (c) IPython Development Team.
-# Distributed under the terms of the Modified BSD License.
+# Distributed under the terms of the BSD 3-Clause License.
 
 import matplotlib
 from matplotlib.backends.backend_agg import (
