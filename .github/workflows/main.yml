@@ -40,5 +40,8 @@ jobs:
     - name: Install package
       run: pip install .
 
+    - name: Test installation
+      run: python -c 'from matplotlib_inline.backend_inline import show'
+
     - name: Test flake8
       run: flake8 matplotlib_inline --ignore=E501,W504,W503
