@@ -26,13 +26,13 @@ def show(close=None, block=None):
     Parameters
     ----------
     close : bool, optional
-      If true, a ``plt.close('all')`` call is automatically issued after
-      sending all the figures. If this is set, the figures will entirely
-      removed from the internal list of figures.
+        If true, a ``plt.close('all')`` call is automatically issued after
+        sending all the figures. If this is set, the figures will entirely
+        removed from the internal list of figures.
     block : Not used.
-      The `block` parameter is a Matplotlib experimental parameter.
-      We accept it in the function signature for compatibility with other
-      backends.
+        The `block` parameter is a Matplotlib experimental parameter.
+        We accept it in the function signature for compatibility with other
+        backends.
     """
     if close is None:
         close = InlineBackend.instance().close_figures
