@@ -1,22 +1,22 @@
 # Matplotlib Inline Back-end for IPython and Jupyter
 
-## Installation:
-
-With pip:
-
-```bash
-pip install matplotlib-inline
-```
+## Installation
 
 With conda:
 
 ```bash
-conda install -c conda-forge matplotlib-inline
+conda install -c conda-forge notebook matplotlib
+```
+
+With pip:
+
+```bash
+pip install notebook matplotlib
 ```
 
 ## Usage
 
-In a Jupyter Notebook:
+This package is included in IPython and can be used in a Jupyter Notebook:
 
 ```python
 %matplotlib inline
