@@ -32,11 +32,13 @@ class InlineBackendConfig(SingletonConfigurable):
 class InlineBackend(InlineBackendConfig):
     """An object to store configuration of the inline backend."""
 
-    rc = Dict({ },
+    rc = Dict(
+        {},
         help="""Deprecated: as of v0.1.4, we do not override any matplotlib
-        defaults. Please use matplotlib's configuration tools, or customize this class
-        in your `ipython_config.py` file for IPython/Jupyter-specific usage."""
-    ).tag(config=True)
+        defaults. Please use matplotlib's configuration tools, or customize
+        this classin your `ipython_config.py` file for IPython/Jupyter-
+        specific usage."""
+        ).tag(config=True)
 
     figure_formats = Set(
         {'png'},
