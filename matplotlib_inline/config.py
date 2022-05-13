@@ -32,12 +32,19 @@ class InlineBackendConfig(SingletonConfigurable):
 class InlineBackend(InlineBackendConfig):
     """An object to store configuration of the inline backend."""
 
+    # While we are deprecating overriding matplotlib defaults out of the
+    # box, this structure should remain here (empty) for API compatibility
+    # and the use of other tools that may need it. Specifically Spyder takes
+    # advantage of it.
+    # See https://github.com/ipython/ipython/issues/10383 for details.
     rc = Dict(
         {},
-        help="""Deprecated: as of v0.1.4, we do not override any matplotlib
-        defaults. Please use matplotlib's configuration tools, or customize
-        this classin your `ipython_config.py` file for IPython/Jupyter-
-        specific usage."""
+        help="""Dict to manage matplotlib configuration defaults in the inline
+        backend. As of v0.1.4 IPython/Jupyter do not override defaults out of
+        the box, but third-party tools may use it to manage rc data. To change
+        personal defaults for matplotlib,  use matplotlib's configuration
+        tools, or customize this class in your `ipython_config.py` file for
+        IPython/Jupyter- specific usage."""
         ).tag(config=True)
 
     figure_formats = Set(
