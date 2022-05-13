@@ -44,8 +44,7 @@ class InlineBackend(InlineBackendConfig):
         the box, but third-party tools may use it to manage rc data. To change
         personal defaults for matplotlib,  use matplotlib's configuration
         tools, or customize this class in your `ipython_config.py` file for
-        IPython/Jupyter- specific usage."""
-        ).tag(config=True)
+        IPython/Jupyter- specific usage.""").tag(config=True)
 
     figure_formats = Set(
         {'png'},
