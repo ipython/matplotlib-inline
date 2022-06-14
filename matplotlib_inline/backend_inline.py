@@ -115,19 +115,20 @@ def flush_figures():
     if not show._draw_called:
         return
 
-    if InlineBackend.instance().close_figures:
-        # ignore the tracking, just draw and close all figures
-        try:
-            return show(True)
-        except Exception as e:
-            # safely show traceback if in IPython, else raise
-            ip = get_ipython()
-            if ip is None:
-                raise e
-            else:
-                ip.showtraceback()
-                return
     try:
+        if InlineBackend.instance().close_figures:
+            # ignore the tracking, just draw and close all figures
+            try:
+                return show(True)
+            except Exception as e:
+                # safely show traceback if in IPython, else raise
+                ip = get_ipython()
+                if ip is None:
+                    raise e
+                else:
+                    ip.showtraceback()
+                    return
+
         # exclude any figures that were closed:
         active = set([fm.canvas.figure for fm in Gcf.get_all_fig_managers()])
         for fig in [fig for fig in show._to_draw if fig in active]:
