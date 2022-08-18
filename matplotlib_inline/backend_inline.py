@@ -52,7 +52,7 @@ def new_figure_manager_given_figure(num, figure):
     # should be a no-op (otherwise we'll generate duplicate plots, since a user
     # who set ioff() manually expects to make separate draw/show calls).
     if not matplotlib.is_interactive():
-        return
+        return manager
 
     # ensure current figure will be drawn, and each subsequent call
     # of draw_if_interactive() moves the active figure to ensure it is
