@@ -1,0 +1,46 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools"]
+
+[project]
+name = "matplotlib-inline"
+description = "Inline Matplotlib backend for Jupyter"
+authors = [
+    {name = "IPython Development Team", email = "ipython-dev@python.org"},
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: IPython",
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Framework :: Jupyter :: JupyterLab :: 3",
+    "Framework :: Jupyter :: JupyterLab :: 4",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics",
+]
+dependencies = ["traitlets"]
+dynamic = ["version"]
+keywords = [
+    "ipython",
+    "jupyter",
+    "matplotlib",
+    "python",
+]
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/ipython/matplotlib-inline"
+
+[tool.setuptools.dynamic]
+version = {attr = "matplotlib_inline.__version__"}
