@@ -42,8 +42,30 @@ requires-python = ">=3.8"
 [project.entry-points."matplotlib.backend"]
 inline = "matplotlib_inline.backend_inline"
 
+[project.optional-dependencies]
+test = [
+    "flake8",
+    "matplotlib",
+    "nbdime",
+    "nbval",
+    "notebook",
+    "pytest",
+]
+
 [project.urls]
 Homepage = "https://github.com/ipython/matplotlib-inline"
 
 [tool.setuptools.dynamic]
 version = {attr = "matplotlib_inline.__version__"}
+
+[tool.pytest.ini_options]
+xfail_strict = true
+log_cli_level = "info"
+addopts = [
+    "--nbval",
+    "--nbdime",
+    "--ignore=tests/notebooks/.ipynb_checkpoints/*",
+]
+testpaths = [
+    "tests",
+]
