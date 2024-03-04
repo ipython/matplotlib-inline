@@ -3,10 +3,10 @@
 # Copyright (c) IPython Development Team.
 # Distributed under the terms of the BSD 3-Clause License.
 
+import importlib
+
 import matplotlib
 from matplotlib import colors
-from matplotlib.backends import backend_agg
-from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib._pylab_helpers import Gcf
 from matplotlib.figure import Figure
 
@@ -16,6 +16,29 @@ from IPython.core.pylabtools import select_figure_formats
 from IPython.display import display
 
 from .config import InlineBackend
+
+
+def set_rendering_backend(backend_name):
+    """
+    Set the rendering backend.
+
+    Parameters
+    ----------
+    backend_name : str
+        A backend name, as would be passed to ``matplotlib.use()``.  The
+        backend should be non-interactive.
+    """
+    global _backend_module, FigureCanvas
+    _backend_module = importlib.import_module(
+        backend_name[9:] if backend_name.startswith("module://")
+        else f"matplotlib.backends.backend_{backend_name.lower()}")
+    # Changes to matplotlib in version 1.2 requires a mpl backend to supply a
+    # FigureCanvas.  See https://github.com/matplotlib/matplotlib/pull/1125
+    FigureCanvas = _backend_module.FigureCanvas
+
+
+_backend_module = FigureCanvas = None  # Will be set by the call below.
+set_rendering_backend("agg")  # The default rendering backend.
 
 
 def new_figure_manager(num, *args, FigureClass=Figure, **kwargs):
@@ -33,7 +56,7 @@ def new_figure_manager_given_figure(num, figure):
 
     This function is part of the API expected by Matplotlib backends.
     """
-    manager = backend_agg.new_figure_manager_given_figure(num, figure)
+    manager = _backend_module.new_figure_manager_given_figure(num, figure)
 
     # Hack: matplotlib FigureManager objects in interacive backends (at least
     # in some of them) monkeypatch the figure object and add a .show() method
@@ -150,12 +173,6 @@ def flush_figures():
         # clear flags for next round
         show._to_draw = []
         show._draw_called = False
-
-
-# Changes to matplotlib in version 1.2 requires a mpl backend to supply a default
-# figurecanvas. This is set here to a Agg canvas
-# See https://github.com/matplotlib/matplotlib/pull/1125
-FigureCanvas = FigureCanvasAgg
 
 
 def configure_inline_support(shell, backend):
