@@ -26,22 +26,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
+    - name: Setup Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-        mamba-version: "*"
-        auto-activate-base: false
-        channels: conda-forge
 
-    - name: Install dependencies
-      run: mamba install ipython matplotlib flake8
-
-    - name: Install package
-      run: pip install .
+    - name: Install package with test dependencies
+      run: pip install .[test]
 
     - name: Test installation
-      run: python -c 'from matplotlib_inline.backend_inline import show'
+      run: pytest -v
 
     - name: Test flake8
       run: flake8 matplotlib_inline --ignore=E501,W504,W503
