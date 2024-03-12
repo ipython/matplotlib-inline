@@ -176,7 +176,7 @@ def configure_inline_support(shell, backend):
     if cfg not in shell.configurables:
         shell.configurables.append(cfg)
 
-    if backend == 'module://matplotlib_inline.backend_inline':
+    if backend in ('inline', 'module://matplotlib_inline.backend_inline'):
         shell.events.register('post_execute', flush_figures)
 
         # Save rcParams that will be overwrittern
