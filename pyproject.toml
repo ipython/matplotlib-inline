@@ -39,6 +39,9 @@ license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.8"
 
+[project.entry-points."matplotlib.backend"]
+inline = "matplotlib_inline.backend_inline"
+
 [project.urls]
 Homepage = "https://github.com/ipython/matplotlib-inline"
 
