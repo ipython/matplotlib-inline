@@ -211,7 +211,7 @@ def _enable_matplotlib_integration():
     from matplotlib import get_backend
     ip = get_ipython()
     backend = get_backend()
-    if ip and backend == 'module://%s' % __name__:
+    if ip and backend in ('inline', 'module://matplotlib_inline.backend_inline'):
         from IPython.core.pylabtools import activate_matplotlib
         try:
             activate_matplotlib(backend)
