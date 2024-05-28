@@ -45,6 +45,7 @@ inline = "matplotlib_inline.backend_inline"
 [project.optional-dependencies]
 test = [
     "flake8",
+    "jupyter_server<2.12.6",  # Until https://github.com/jupyter/nbdime/issues/749 is fixed.
     "matplotlib",
     "nbdime",
     "nbval",
