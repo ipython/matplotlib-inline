@@ -208,9 +208,9 @@ def configure_inline_support(shell, backend):
 
 def _enable_matplotlib_integration():
     """Enable extra IPython matplotlib integration when we are loaded as the matplotlib backend."""
-    from matplotlib import get_backend
+    from matplotlib import rcParams
     ip = get_ipython()
-    backend = get_backend()
+    backend = rcParams._get("backend")
     if ip and backend in ('inline', 'module://matplotlib_inline.backend_inline'):
         from IPython.core.pylabtools import activate_matplotlib
         try:
