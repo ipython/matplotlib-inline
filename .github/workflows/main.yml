@@ -15,7 +15,7 @@ defaults:
 jobs:
   run:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
+    timeout-minutes: 3
 
     strategy:
       fail-fast: false
