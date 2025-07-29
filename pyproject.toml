@@ -63,7 +63,6 @@ xfail_strict = true
 log_cli_level = "info"
 addopts = [
     "--nbval",
-    "--nbdime",
     "--ignore=tests/notebooks/.ipynb_checkpoints/*",
 ]
 testpaths = [
