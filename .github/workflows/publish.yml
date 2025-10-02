@@ -1,3 +1,4 @@
+name: "Publish Wheel"
 on:
   push:
     tags:

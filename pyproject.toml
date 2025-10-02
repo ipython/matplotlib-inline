@@ -11,20 +11,20 @@ authors = [
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Framework :: IPython",
-    "Framework :: Jupyter",
-    "Framework :: Jupyter :: JupyterLab",
     "Framework :: Jupyter :: JupyterLab :: 3",
     "Framework :: Jupyter :: JupyterLab :: 4",
+    "Framework :: Jupyter :: JupyterLab",
+    "Framework :: Jupyter",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: BSD License",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
+    "License-Expression: BSD-3-Clause",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python",
     "Topic :: Multimedia :: Graphics",
 ]
 dependencies = ["traitlets"]
@@ -64,7 +64,11 @@ log_cli_level = "info"
 addopts = [
     "--nbval",
     "--ignore=tests/notebooks/.ipynb_checkpoints/*",
+    "--strict-config",
+    "-ra",
+    "--strict-markers",
 ]
+filterwarnings = ["error"]
 testpaths = [
     "tests",
 ]

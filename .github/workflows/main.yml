@@ -11,6 +11,9 @@ on:
 defaults:
   run:
     shell: bash -l {0}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
   run:
@@ -21,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.13t"]
 
     steps:
     - name: Checkout
