@@ -48,3 +48,12 @@ jobs:
 
     - name: Test flake8
       run: flake8 matplotlib_inline --ignore=E501,W504,W503
+
+    - name: Install ruff
+      run: mamba install ruff
+
+    - name: Check code with ruff
+      run: ruff check matplotlib_inline
+
+    - name: Check formatting with ruff
+      run: ruff format matplotlib_inline --check
