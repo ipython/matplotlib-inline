@@ -37,11 +37,11 @@ jobs:
       run: pip install .[test]
 
     - name: Test installation with nbdime
-      if: ${{ matrix.python-version != "3.9" }}
+      if: ${{ matrix.python-version != '3.9' }}
       run: pytest -v --nbdime
 
     - name: Test installation without nbdime
-      if: ${{ matrix.python-version == "3.9" }}
+      if: ${{ matrix.python-version == '3.9' }}
       run: pytest -v
 
     - name: Test flake8
