@@ -43,7 +43,7 @@ jobs:
       run: flake8 matplotlib_inline --ignore=E501,W504,W503
 
     - name: Install ruff
-      run: mamba install ruff
+      run: pip install ruff
 
     - name: Check code with ruff
       run: ruff check matplotlib_inline
