@@ -100,9 +100,9 @@ def show(close=None, block=None):
 
 
 # This flag will be reset by draw_if_interactive when called
-show._draw_called = False
+show._draw_called = False  # type: ignore[attr-defined]
 # list of figures to draw when flush_figures is called
-show._to_draw = []
+show._to_draw = []  # type: ignore[attr-defined]
 
 
 def flush_figures():
