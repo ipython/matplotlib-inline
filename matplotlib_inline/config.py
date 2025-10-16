@@ -6,8 +6,8 @@ This module does not import anything from matplotlib.
 # Copyright (c) IPython Development Team.
 # Distributed under the terms of the BSD 3-Clause License.
 
+from traitlets import Bool, Dict, Instance, Set, TraitError, Unicode
 from traitlets.config.configurable import SingletonConfigurable
-from traitlets import Dict, Instance, Set, Bool, TraitError, Unicode
 
 
 # Configurable for inline backend options

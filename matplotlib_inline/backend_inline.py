@@ -4,16 +4,15 @@
 # Distributed under the terms of the BSD 3-Clause License.
 
 import matplotlib
-from matplotlib import colors
-from matplotlib.backends import backend_agg
-from matplotlib.backends.backend_agg import FigureCanvasAgg
-from matplotlib._pylab_helpers import Gcf
-from matplotlib.figure import Figure
-
-from IPython.core.interactiveshell import InteractiveShell
 from IPython.core.getipython import get_ipython
+from IPython.core.interactiveshell import InteractiveShell
 from IPython.core.pylabtools import select_figure_formats
 from IPython.display import display
+from matplotlib import colors
+from matplotlib._pylab_helpers import Gcf
+from matplotlib.backends import backend_agg
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+from matplotlib.figure import Figure
 
 from .config import InlineBackend
 
@@ -101,9 +100,9 @@ def show(close=None, block=None):
 
 
 # This flag will be reset by draw_if_interactive when called
-show._draw_called = False
+show._draw_called = False  # type: ignore[attr-defined]
 # list of figures to draw when flush_figures is called
-show._to_draw = []
+show._to_draw = []  # type: ignore[attr-defined]
 
 
 def flush_figures():
