@@ -52,7 +52,7 @@ jobs:
       run: ruff format matplotlib_inline --check
 
     - name: install Mypy
-      run : pip install mypy matpltolib
+      run : pip install mypy matplotlib
 
     - name: run mypy
       run: mypy .
