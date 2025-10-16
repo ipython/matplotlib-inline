@@ -24,7 +24,7 @@ jobs:
         os: [ubuntu-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14", "3.14t"]
         include:
-          - os: osx-latest
+          - os: macos-latest
             python-version: "3.14"
           - os: windows-latest
             python-version: "3.14"
