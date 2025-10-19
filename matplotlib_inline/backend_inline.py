@@ -287,7 +287,9 @@ def set_matplotlib_formats(*formats, **kwargs):
     To set this in your config files use the following::
 
         c.InlineBackend.figure_formats = {'png', 'jpeg'}
-        c.InlineBackend.print_figure_kwargs.update({'quality' : 90})
+        c.InlineBackend.print_figure_kwargs.update({
+                                        'pil_kwargs': {'quality' : 90}
+                                    })
 
     Parameters
     ----------
