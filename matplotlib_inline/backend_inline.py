@@ -300,7 +300,7 @@ def set_matplotlib_formats(*formats, **kwargs):
 
     In addition, see the docstrings of `plt.savefig()`,
     `matplotlib.figure.Figure.savefig()`, `PIL.Image.Image.save()` and
-    https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html
+    :ref:`Pillow Image file formats <handbook/image-file-formats>`.
     """
     # build kwargs, starting with InlineBackend config
     cfg = InlineBackend.instance()
