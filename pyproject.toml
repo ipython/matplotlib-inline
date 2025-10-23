@@ -21,11 +21,16 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python",
     "Topic :: Multimedia :: Graphics",
 ]
+
+# do not rely on matplotlib/IPython, as we want matplotlib-inline to be _installable_ without pulling the other
+# dependencies
+
 dependencies = ["traitlets"]
 dynamic = ["version"]
 keywords = [
@@ -44,7 +49,6 @@ inline = "matplotlib_inline.backend_inline"
 [project.optional-dependencies]
 test = [
     "flake8",
-    "matplotlib",
     "nbdime",
     "nbval",
     "notebook",
