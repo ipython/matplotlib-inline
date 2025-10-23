@@ -79,7 +79,8 @@ class InlineBackend(InlineBackendConfig):
         {"bbox_inches": "tight"},
         help="""Extra kwargs to be passed to fig.canvas.print_figure.
 
-        Logical examples include: bbox_inches, quality (for jpeg figures), etc.
+        Logical examples include: bbox_inches, pil_kwargs, etc. In addition,
+        see the docstrings of `set_matplotlib_formats`.
         """,
     ).tag(config=True)
     _print_figure_kwargs_changed = _update_figure_formatters
