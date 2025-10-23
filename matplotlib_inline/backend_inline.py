@@ -275,12 +275,21 @@ def set_matplotlib_formats(*formats, **kwargs):
 
     For example, this enables PNG and JPEG output with a JPEG quality of 90%::
 
-        In [1]: set_matplotlib_formats('png', 'jpeg', quality=90)
+        In [1]: set_matplotlib_formats('png', 'jpeg',
+                                       pil_kwargs={'quality': 90})
+
+    To set this in your notebook by `%config` magic::
+
+        In [1]: %config InlineBackend.figure_formats = {'png', 'jpeg'}
+                %config InlineBackend.print_figure_kwargs = \\
+                                        {'pil_kwargs': {'quality' : 90}}
 
     To set this in your config files use the following::
 
         c.InlineBackend.figure_formats = {'png', 'jpeg'}
-        c.InlineBackend.print_figure_kwargs.update({'quality' : 90})
+        c.InlineBackend.print_figure_kwargs.update({
+                                        'pil_kwargs': {'quality' : 90}
+                                    })
 
     Parameters
     ----------
@@ -288,6 +297,10 @@ def set_matplotlib_formats(*formats, **kwargs):
         One or more figure formats to enable: 'png', 'retina', 'jpeg', 'svg', 'pdf'.
     **kwargs
         Keyword args will be relayed to ``figure.canvas.print_figure``.
+
+    In addition, see the docstrings of `plt.savefig()`,
+    `matplotlib.figure.Figure.savefig()`, `PIL.Image.Image.save()` and
+    :ref:`Pillow Image file formats <handbook/image-file-formats>`.
     """
     # build kwargs, starting with InlineBackend config
     cfg = InlineBackend.instance()
