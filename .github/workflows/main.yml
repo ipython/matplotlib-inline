@@ -48,9 +48,15 @@ jobs:
       if: ${{ matrix.python-version == '3.14' }}
       run: flake8 matplotlib_inline --ignore=E501,W504,W503
 
+    - name: Test Build
+      if: ${{ matrix.python-version == '3.14' }}
+      run: |
+        pip install build
+        python -m build
+
     - name: Install ruff
       if: ${{ matrix.python-version == '3.14' }}
-      run: pip   install ruff
+      run: pip install ruff
 
     - name: Check code with ruff
       if: ${{ matrix.python-version == '3.14' }}
