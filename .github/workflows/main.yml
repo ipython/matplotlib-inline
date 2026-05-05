@@ -39,7 +39,10 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Install package with test dependencies
-      run: pip install .[test]
+      # matplotlib is not a dependency but tests need it
+      run: |
+        pip install .[test]
+        pip install matplotlib
 
     - name: Test installation without nbdime
       run: pytest -v
