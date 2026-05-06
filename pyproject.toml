@@ -53,6 +53,7 @@ test = [
     "nbval",
     "notebook",
     "pytest",
+    "matplotlib"
 ]
 
 [project.urls]
