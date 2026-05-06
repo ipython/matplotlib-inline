@@ -39,7 +39,8 @@ keywords = [
     "matplotlib",
     "python",
 ]
-license = {file = "LICENSE"}
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
 readme = "README.md"
 requires-python = ">=3.9"
 
