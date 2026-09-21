@@ -212,8 +212,11 @@ def _enable_matplotlib_integration():
 
     import matplotlib
 
-    if matplotlib.__version_info__ >= (3, 10):
+    version = matplotlib.__version_info__
+    if version >= (3, 10):
         backend = matplotlib.get_backend(auto_select=False)
+    elif version >= (3, 5):
+        backend = matplotlib.get_backend()
     else:
         backend = matplotlib.rcParams._get("backend")
 
