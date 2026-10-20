@@ -124,25 +124,25 @@ def flush_figures():
             # ignore the tracking, just draw and close all figures
             try:
                 return show(True)
-            except Exception as e:
+            except Exception:
                 # safely show traceback if in IPython, else raise
                 ip = get_ipython()
                 if ip is None:
-                    raise e
+                    raise
                 else:
                     ip.showtraceback()
                     return
 
         # exclude any figures that were closed:
-        active = set([fm.canvas.figure for fm in Gcf.get_all_fig_managers()])
+        active = {fm.canvas.figure for fm in Gcf.get_all_fig_managers()}
         for fig in [fig for fig in show._to_draw if fig in active]:
             try:
                 display(fig, metadata=_fetch_figure_metadata(fig))
-            except Exception as e:
+            except Exception:
                 # safely show traceback if in IPython, else raise
                 ip = get_ipython()
                 if ip is None:
-                    raise e
+                    raise
                 else:
                     ip.showtraceback()
                     return
