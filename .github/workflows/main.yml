@@ -26,11 +26,23 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.14t"]
+        matplotlib-version: [""]
+        numpy-version: [""]
         include:
           #- os: macos-latest
           #  python-version: "3.14"
           - os: windows-latest
             python-version: "3.14"
+            matplotlib-version: ""
+            numpy-version: ""
+          - os: ubuntu-latest
+            python-version: "3.9"
+            matplotlib-version: "==3.5.0"
+            numpy-version: "<2"
+          - os: ubuntu-latest
+            python-version: "3.12"
+            matplotlib-version: "<3.10.0"
+            numpy-version: ""
 
     steps:
     - name: Checkout
@@ -45,9 +57,9 @@ jobs:
 
     - name: Install package with test dependencies
       # matplotlib is not a dependency but tests need it
-      run: |
-        pip install .[test]
-        pip install matplotlib
+      run: >-
+        pip install ".[test]" "matplotlib${{ matrix.matplotlib-version }}"
+        "numpy${{ matrix.numpy-version }}"
 
     - name: Test installation without nbdime
       run: pytest -v
