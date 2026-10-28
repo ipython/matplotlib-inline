@@ -1,3 +1,5 @@
+name: Tests
+
 on:
   push:
     branches:
@@ -35,7 +37,7 @@ jobs:
       run: pipx run pre-commit run --all-files --show-diff-on-failure
 
   run:
-    name: Tests
+    name: Build and test
     needs: pre-commit
     runs-on: ${{ matrix.os }}
     timeout-minutes: 3
