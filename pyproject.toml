@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "flit_core.buildapi"
-requires = ["flit_core>=3.2"]
+requires = ["flit_core>=3.11"]
 
 [project]
 name = "matplotlib-inline"
@@ -61,6 +61,9 @@ Homepage = "https://github.com/ipython/matplotlib-inline"
 
 [tool.setuptools.dynamic]
 version = {attr = "matplotlib_inline.__version__"}
+
+[tool.flit.sdist]
+include = ["tests/"]
 
 [tool.pytest.ini_options]
 xfail_strict = true
