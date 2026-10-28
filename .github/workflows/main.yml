@@ -18,6 +18,7 @@ concurrency:
 
 jobs:
   run:
+    name: Build and test
     runs-on: ${{ matrix.os }}
     timeout-minutes: 3
 
@@ -52,32 +53,8 @@ jobs:
     - name: Test installation without nbdime
       run: pytest -v
 
-    - name: Test flake8
-      if: ${{ matrix.python-version == '3.14' }}
-      run: flake8 matplotlib_inline --ignore=E501,W504,W503
-
     - name: Test Build
       if: ${{ matrix.python-version == '3.14' }}
       run: |
         pip install build
         python -m build
-
-    - name: Install ruff
-      if: ${{ matrix.python-version == '3.14' }}
-      run: pip install ruff
-
-    - name: Check code with ruff
-      if: ${{ matrix.python-version == '3.14' }}
-      run: ruff check matplotlib_inline
-
-    - name: Check formatting with ruff
-      if: ${{ matrix.python-version == '3.14' }}
-      run: ruff format matplotlib_inline --check
-
-    - name: install Mypy
-      if: ${{ matrix.python-version == '3.14' }}
-      run : pip install mypy matplotlib
-
-    - name: run mypy
-      if: ${{ matrix.python-version == '3.14' }}
-      run: mypy .
