@@ -49,7 +49,6 @@ inline = "matplotlib_inline.backend_inline"
 
 [project.optional-dependencies]
 test = [
-    "flake8",
     "nbdime",
     "nbval",
     "notebook",

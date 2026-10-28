@@ -1,5 +1,3 @@
-name: Tests
-
 on:
   push:
     branches:
@@ -17,7 +15,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  pre-commit:
+    name: Pre-commit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      with:
+        persist-credentials: false
+
+    - name: Setup Python
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+      with:
+        python-version: "3.14"
+
+    - name: Run pre-commit
+      run: pipx run pre-commit run --all-files --show-diff-on-failure
+
   run:
+    name: Tests
+    needs: pre-commit
     runs-on: ${{ matrix.os }}
     timeout-minutes: 3
 
@@ -52,32 +71,8 @@ jobs:
     - name: Test installation without nbdime
       run: pytest -v
 
-    - name: Test flake8
-      if: ${{ matrix.python-version == '3.14' }}
-      run: flake8 matplotlib_inline --ignore=E501,W504,W503
-
     - name: Test Build
       if: ${{ matrix.python-version == '3.14' }}
       run: |
         pip install build
         python -m build
-
-    - name: Install ruff
-      if: ${{ matrix.python-version == '3.14' }}
-      run: pip install ruff
-
-    - name: Check code with ruff
-      if: ${{ matrix.python-version == '3.14' }}
-      run: ruff check matplotlib_inline
-
-    - name: Check formatting with ruff
-      if: ${{ matrix.python-version == '3.14' }}
-      run: ruff format matplotlib_inline --check
-
-    - name: install Mypy
-      if: ${{ matrix.python-version == '3.14' }}
-      run : pip install mypy matplotlib
-
-    - name: run mypy
-      if: ${{ matrix.python-version == '3.14' }}
-      run: mypy .
