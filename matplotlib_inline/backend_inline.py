@@ -96,7 +96,9 @@ def show(close=None, block=None):
         # only call close('all') if any to close
         # close triggers gc.collect, which can be slow
         if close and Gcf.get_all_fig_managers():
-            matplotlib.pyplot.close("all")
+            from matplotlib import pyplot
+
+            pyplot.close("all")
 
 
 # This flag will be reset by draw_if_interactive when called
